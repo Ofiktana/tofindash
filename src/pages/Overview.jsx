@@ -4,7 +4,55 @@ import Title from '../components/Title'
 import { LuSquareMenu } from "react-icons/lu";
 import SectionBlock from '../components/SectionBlock';
 
+import MarketOverview from '../components/MarketOverview';
+import WatchList from '../components/WatchList';
+import Chart from '../components/Chart';
+import Stocks from '../components/Stocks';
+import Cryptocurrencies from '../components/Cryptocurrencies';
+import MarketNews from '../components/MarketNews';
+
 function Overview({ showMobileNav }) {
+
+  const sectionItems = [
+    {
+      title: 'Market Overview',
+      subtitle: 'Live market indices and commodities',
+      className: 'market-overview',
+      child: <MarketOverview />
+    },
+    {
+      title: 'Watchlist',
+      subtitle: 'Track your favorite assets',
+      className: 'watch-list',
+      child: <WatchList />
+    },
+    {
+      title: '',
+      subtitle: '',
+      className: 'chart',
+      child: <Chart />
+    },
+    {
+      title: 'Stocks',
+      subtitle: 'Top performing stocks today',
+      className: 'stocks',
+      child: <Stocks />
+    },
+    {
+      title: 'Cryptocurrencies',
+      subtitle: 'Top cryptocurrencies by market cap',
+      className: 'cryptocurrencies',
+      child: <Cryptocurrencies />
+    },
+    {
+      title: 'Market News',
+      subtitle: 'Latest financial news and updates',
+      className: 'market-news',
+      child: <MarketNews />
+    },
+
+  ]
+
   return (
     <>
       <div className='page-header'>
@@ -13,36 +61,20 @@ function Overview({ showMobileNav }) {
       </div>
 
       <div className="overview-grid">
-        <div className="overview-grid-item market-overview">
-          <SectionBlock title='Market Overview' subtitle='Live market indices and commodities'>
-
-          </SectionBlock>
-        </div>
-        <div className="overview-grid-item watch-list">
-          <SectionBlock title='Watchlist' subtitle='Track your favorite assets'>
-
-          </SectionBlock>
-        </div>
-        <div className="overview-grid-item chart">
-          <SectionBlock title='' subtitle=''>
-
-          </SectionBlock>
-        </div>
-        <div className="overview-grid-item stocks">
-          <SectionBlock title='Stocks' subtitle='Top performing stocks today'>
-
-          </SectionBlock>
-        </div>
-        <div className="overview-grid-item cryptocurrencies">
-          <SectionBlock title='Cryptocurrencies' subtitle='Top cryptocurrencies by market cap'>
-
-          </SectionBlock>
-        </div>
-        <div className="overview-grid-item market-news">
-          <SectionBlock title='Market News' subtitle='Latest financial news and updates'>
-
-          </SectionBlock>
-        </div>
+        {
+          sectionItems.map(item => {
+            return (
+              <div className={`overview-grid-item ${item.className}`} key={item.className}>
+                <SectionBlock title={item.title} subtitle={item.subtitle}>
+                  <div className="section-content">
+                    {item.child}
+                  </div>
+                </SectionBlock>
+              </div>
+            )
+          })
+        }
+      
       </div>
     </>
   )
