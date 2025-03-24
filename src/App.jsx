@@ -1,6 +1,8 @@
 import { useState, useEffect, createContext } from 'react'
 import Navigation from "./components/Navigation/Navigation"
 import Overview from './pages/Overview'
+import { stocksRawData } from './data/stocksData_copy'
+import { newsRawData } from './data/newsData_copy'
 
 const DataContext = createContext()
 
@@ -28,23 +30,26 @@ function App() {
   
   useEffect(()=>{
     const cryptoURL = 'https://api.coinpaprika.com/v1/tickers'
-    const stockURL = `https://financialmodelingprep.com/stable/company-screener?apikey=IWvh5cCuMr5uyygt6GZ04j72l2V9m5WA`
-    const newsURL = 'https://financialmodelingprep.com/stable/fmp-articles?apikey=IWvh5cCuMr5uyygt6GZ04j72l2V9m5WA'
+    const stockURL = './data/stocksData.json' //`https://financialmodelingprep.com/stable/company-screener?apikey=IWvh5cCuMr5uyygt6GZ04j72l2V9m5WA`
+    const newsURL = './data/newsData.json' //'https://financialmodelingprep.com/stable/fmp-articles?apikey=IWvh5cCuMr5uyygt6GZ04j72l2V9m5WA'
 
     fetch(cryptoURL)
       .then(res => res.json())
       .then(data => setCrypto(data))
       .catch(err => console.log(err))
 
-    fetch(stockURL)
-      .then(res => res.json())
-      .then(data => setStocks(data))
-      .catch(err => console.log(err))
+    // fetch(stockURL)
+    //   .then(res => res.json())
+    //   .then(data => setStocks(data))
+    //   .catch(err => console.log(err))
 
-    fetch(newsURL)
-      .then(res => res.json())
-      .then(data => setNews(data))
-      .catch(err => console.log(err))
+    // fetch(newsURL)
+    //   .then(res => res.json())
+    //   .then(data => setNews(data))
+    //   .catch(err => console.log(err))
+
+    setStocks(stocksRawData)
+    setNews(newsRawData)
 
   },[])
 
